@@ -27,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import Model.Cart;
-import Prevalent.CartViewHolder;
+import ViewHolder.CartViewHolder;
 import Prevalent.Prevalent;
 
 public class CartActivity extends AppCompatActivity {
