@@ -13,6 +13,20 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_green_light">
+        <EditText
+
+            android:id="@+id/search_product_name"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:background="@android:color/white"
+            android:hint="Product Name"
+            android:padding="9dp"
+            android:textColorHint="@color/design_default_color_on_secondary"
+            android:textSize="18dp"
+
+            />
 
         <Button
             android:id="@+id/search_btn"
