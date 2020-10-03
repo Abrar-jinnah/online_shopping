@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import Model.Cart;
-import Prevalent.CartViewHolder;
+import ViewHolder.CartViewHolder;
 
 public class AdminUserProductsActivity extends AppCompatActivity {
     private RecyclerView productsList;
