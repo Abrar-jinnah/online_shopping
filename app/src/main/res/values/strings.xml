@@ -48,6 +48,10 @@
     <string name="enterhomeaddress">Your Home Address</string>
     <string name="enteryourcity">Your City Name</string>
     <string name="confirmtheshippment">Confirm</string>
+    <string name="enterthename">Name</string>
+    <string name="enterthephonenumber">Phone Number</string>
+    <string name="inputnewpassword">Password</string>
+    <string name="createaccountbtn">Create Account</string>
 
 
 </resources>
