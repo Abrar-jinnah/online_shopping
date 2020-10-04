@@ -41,6 +41,7 @@
     <string name="logoutbtn">Logout</string>
     <string name="neworderheading">New Orders</string>
     <string name="productheading">Products</string>
+    <string name="totalprice">Total Price</string>
 
 
 </resources>
