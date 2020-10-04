@@ -13,6 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_green_light">
+
         <EditText
 
             android:id="@+id/search_product_name"
@@ -21,7 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
             android:background="@android:color/white"
-            android:hint="Product Name"
+            android:hint="@string/typeproductname"
             android:padding="9dp"
             android:textColorHint="@color/design_default_color_on_secondary"
             android:textSize="18dp"
@@ -36,7 +37,7 @@
             android:layout_toRightOf="@+id/search_product_name"
             android:background="@android:color/holo_green_light"
             android:padding="9dp"
-            android:text="Search"
+            android:text="@string/searchbtn"
             android:textColor="@android:color/white"
             android:textSize="16dp"
             android:textStyle="bold" />
