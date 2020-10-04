@@ -39,6 +39,7 @@
     <string name="addnewprduct">Add New Product</string>
     <string name="checkneworders">Check New Orders</string>
     <string name="logoutbtn">Logout</string>
+    <string name="neworderheading">New Orders</string>
 
 
 </resources>
