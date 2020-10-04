@@ -59,6 +59,9 @@
     <string name="enterphone">Phone Number...</string>
     <string name="enteraddress">Address...</string>
     <string name="username">user name</string>
+    <string name="productname">Product Name</string>
+    <string name="productprice">Product Price</string>
+    <string name="productdescription">Product Description</string>
 
 
 </resources>
