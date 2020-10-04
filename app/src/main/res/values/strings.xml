@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">OnlineShopping</string>
+    //IT19352572
+
+    <string name="main_join_now_btn">Join Now</string>
+    <string name="main_login_btn"> Already have an Account? Login</string>
+    <string name="login_phone_number_input">Phone Number</string>
+    <string name="login_password_input">Password</string>
+    <string name="remember_me_chkb">Remember me</string>
+    <string name="login_btn">Login</string>
+    <string name="admin_panel_link">I am an Admin?</string>
+    <string name="close_settings_btn">Close</string>
+    <string name="update_account_settings_btn">Update</string>
+    <string name="profile_image_change_btn">Change Profile</string>
+    <string name="profile_phone_number">Phone Number...</string>
+    <string name="profile_user_name">User Name...</string>
+    <string name="profile_password">Password...</string>
+    <string name="delete_profile_btn">Delete</string>
+
 
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
