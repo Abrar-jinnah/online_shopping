@@ -32,6 +32,11 @@
     <string name="update">Update</string>
     <string name="close">Close</string>
     <string name="cntnumber">Contact Number...</string>
+    <string name="prductname">Product Name...</string>
+    <string name="prduct_description">Product Description...</string>
+    <string name="prductprice">Product Price...</string>
+    <string name="addprudct">Add Product</string>
+    <string name="addnewprduct">Add New Product</string>
 
 
 </resources>

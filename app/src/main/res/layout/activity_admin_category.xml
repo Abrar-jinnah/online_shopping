@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminCategoryActivity">
+
     <TextView
         android:id="@+id/slogan_category"
         android:layout_width="match_parent"
@@ -12,11 +13,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Add New Product"
+        android:text="@string/addnewprduct"
         android:textAlignment="center"
         android:textSize="26sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
     <LinearLayout
         android:id="@+id/linear1_category_layout"
         android:layout_width="match_parent"
