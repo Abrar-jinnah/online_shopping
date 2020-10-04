@@ -58,6 +58,7 @@
     <string name="updateyourprofile">Update</string>
     <string name="enterphone">Phone Number...</string>
     <string name="enteraddress">Address...</string>
+    <string name="username">user name</string>
 
 
 </resources>
