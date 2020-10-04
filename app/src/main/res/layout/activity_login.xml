@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backll"
+    android:background="@drawable/bck2"
     tools:context=".LoginActivity">
     <ImageView
         android:id="@+id/login_applogo"
@@ -23,8 +23,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
-        android:hint="Phone Number"
-        android:maxLength="10"
+        android:hint="@string/login_phone_number_input"
         android:inputType="number"
         android:padding="20dp"
         android:textColor="@color/colorText"
@@ -41,7 +40,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
-        android:hint="Password"
+        android:hint="@string/login_password_input"
         android:inputType="textPassword"
         android:padding="20dp"
         android:textColor="@color/colorText"
@@ -64,21 +63,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
             android:gravity="center_vertical"
-            android:text="Remember me"
+            android:text="@string/remember_me_chkb"
             android:textColor="@color/colorText"
             android:textSize="14sp"
             android:textStyle="bold"
             app:cbd_strokeColor="@android:color/holo_green_light" />
-
-        <TextView
-            android:id="@+id/forget_password_link"
-            android:layout_width="188dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="65dp"
-            android:text="Forget Password"
-            android:textColor="@color/colorText"
-            android:textSize="14sp"
-            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -93,7 +82,7 @@
         android:layout_marginRight="15dp"
         android:background="@android:color/holo_green_light"
         android:padding="5dp"
-        android:text="Login"
+        android:text="@string/login_btn"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="19sp"
@@ -107,7 +96,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="80dp"
         android:layout_marginEnd="23dp"
-        android:text="I'm an Admin?"
+        android:text="@string/admin_panel_link"
         android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold" />

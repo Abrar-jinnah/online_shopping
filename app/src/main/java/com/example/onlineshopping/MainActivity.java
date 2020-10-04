@@ -16,8 +16,6 @@ import android.widget.Toast;
 
 import Model.Users;
 import Prevalent.Prevalent;
-
-import com.example.onlineshopping.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

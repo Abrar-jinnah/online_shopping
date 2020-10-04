@@ -168,8 +168,12 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_categories) {
 
+        } else if (id == R.id.nav_profile) {
+            Intent intent=new Intent(HomeActivity.this, CustomProfile.class);
+            startActivity(intent);
+
         } else if (id == R.id.nav_settings) {
-            Intent intent=new Intent(HomeActivity.this, SettingsActivity.class);
+            Intent intent=new Intent(HomeActivity.this,SettingsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_logout) {

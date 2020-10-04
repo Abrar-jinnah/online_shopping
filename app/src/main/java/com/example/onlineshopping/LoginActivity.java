@@ -2,6 +2,7 @@ package com.example.onlineshopping;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,15 +14,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import Model.Users;
+import Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.CheckBox;
-
-import Model.Users;
-import Prevalent.Prevalent;
 import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
