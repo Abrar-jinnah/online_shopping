@@ -62,6 +62,7 @@
     <string name="productname">Product Name</string>
     <string name="productprice">Product Price</string>
     <string name="productdescription">Product Description</string>
+    <string name="showneworders">Show User Order Product</string>
 
 
 </resources>
