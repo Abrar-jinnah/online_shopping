@@ -8,10 +8,14 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="changeprofile">Change Profile</string>
+    <string name="update">Update</string>
+    <string name="close">Close</string>
+    <string name="cntnumber">Contact Number...</string>
+    <string name="Residennceadd">Residence address</string>
 
 
 </resources>

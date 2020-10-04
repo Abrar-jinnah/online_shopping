@@ -51,7 +51,6 @@ public class SettingsActivity extends AppCompatActivity {
         storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
 
         profileImageView = (CircleImageView) findViewById(R.id.settings_profile_image);
-        fullNameEditText = (EditText) findViewById(R.id.settings_full_name);
         userPhoneEditText = (EditText) findViewById(R.id.settings_phone_number);
         addressEditText = (EditText) findViewById(R.id.settings_address);
         profileChangeTextBtn = (TextView) findViewById(R.id.profile_image_change_btn);
@@ -100,7 +99,6 @@ public class SettingsActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
         HashMap<String, Object> userMap = new HashMap<>();
-        userMap. put("name", fullNameEditText.getText().toString());
         userMap. put("address", addressEditText.getText().toString());
         userMap. put("phoneOrder", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
@@ -183,7 +181,6 @@ public class SettingsActivity extends AppCompatActivity {
                         myUrl = downloadUrl.toString();
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
                         HashMap<String, Object> userMap = new HashMap<>();
-                        userMap. put("name", fullNameEditText.getText().toString());
                         userMap. put("address", addressEditText.getText().toString());
                         userMap. put("phoneOrder", userPhoneEditText.getText().toString());
                         userMap. put("image", myUrl);
@@ -217,11 +214,9 @@ public class SettingsActivity extends AppCompatActivity {
                     if (dataSnapshot.child("image").exists())
                     {
                         String image = dataSnapshot.child("image").getValue().toString();
-                        String name = dataSnapshot.child("name").getValue().toString();
                         String phone = dataSnapshot.child("phoneOrder").getValue().toString();
                         String address = dataSnapshot.child("address").getValue().toString();
                         Picasso.get().load(image).into(profileImageView);
-                        fullNameEditText.setText(name);
                         userPhoneEditText.setText(phone);
                         addressEditText.setText(address);
                     }
