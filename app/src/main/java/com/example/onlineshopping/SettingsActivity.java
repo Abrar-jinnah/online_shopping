@@ -215,6 +215,7 @@ public class SettingsActivity extends AppCompatActivity {
                         String phone = dataSnapshot.child("phone").getValue().toString();
                         String address = dataSnapshot.child("address").getValue().toString();
                         Picasso.get().load(image).into(profileImageView);
+
                         userPhoneEditText.setText(phone);
                         addressEditText.setText(address);
                     }
