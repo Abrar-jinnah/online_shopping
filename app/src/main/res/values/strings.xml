@@ -42,6 +42,7 @@
     <string name="neworderheading">New Orders</string>
     <string name="productheading">Products</string>
     <string name="totalprice">Total Price</string>
+    <string name="nextbtn">Next</string>
 
 
 </resources>

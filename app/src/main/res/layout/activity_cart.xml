@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@android:color/holo_green_light"
-        android:text="Next"
+        android:text="@string/nextbtn"
         android:textColor="@android:color/white"
         android:textSize="25dp"
 
