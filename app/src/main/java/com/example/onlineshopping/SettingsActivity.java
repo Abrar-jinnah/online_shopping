@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ import java.util.HashMap;
 
 import Prevalent.Prevalent;
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class SettingsActivity extends AppCompatActivity {
     private CircleImageView profileImageView;
@@ -133,17 +135,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void userInfoSaved()
     {
-        if (TextUtils.isEmpty(fullNameEditText.getText().toString()))
+         if (TextUtils.isEmpty(addressEditText.getText().toString()))
         {
-            Toast.makeText(this, "Name is mandatory.", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(addressEditText.getText().toString()))
-        {
-            Toast.makeText(this, "Name is address.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter the address", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(userPhoneEditText.getText().toString()))
         {
-            Toast.makeText(this, "Name is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter the phone number.", Toast.LENGTH_SHORT).show();
         }
         else if(checker.equals("clicked"))
         {
@@ -214,7 +212,7 @@ public class SettingsActivity extends AppCompatActivity {
                     if (dataSnapshot.child("image").exists())
                     {
                         String image = dataSnapshot.child("image").getValue().toString();
-                        String phone = dataSnapshot.child("phoneOrder").getValue().toString();
+                        String phone = dataSnapshot.child("phone").getValue().toString();
                         String address = dataSnapshot.child("address").getValue().toString();
                         Picasso.get().load(image).into(profileImageView);
                         userPhoneEditText.setText(phone);
