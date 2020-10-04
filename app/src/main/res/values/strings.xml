@@ -37,6 +37,8 @@
     <string name="prductprice">Product Price...</string>
     <string name="addprudct">Add Product</string>
     <string name="addnewprduct">Add New Product</string>
+    <string name="checkneworders">Check New Orders</string>
+    <string name="logoutbtn">Logout</string>
 
 
 </resources>
