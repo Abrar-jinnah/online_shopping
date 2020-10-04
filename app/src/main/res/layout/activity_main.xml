@@ -6,28 +6,31 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_img001"
     tools:context=".MainActivity">
+
     <ImageView
         android:id="@+id/app_logo"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="128dp"
+        android:layout_above="@+id/main_join_now_btn"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="60dp"
-        android:src="@drawable/applogo"
-        />
+        android:layout_marginEnd="272dp"
+        android:layout_marginBottom="363dp"
+        android:src="@drawable/logo3" />
 
     <TextView
         android:id="@+id/app_slogan"
-        android:layout_width="248dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="161dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="147dp"
-        android:layout_marginEnd="86dp"
-        android:text="LIFE IS SHORT BUY IT NOW"
-        android:textAlignment="viewEnd"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="9dp"
+        android:text="DREAM MART"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/design_default_color_background"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold|italic" />
 
     <Button
