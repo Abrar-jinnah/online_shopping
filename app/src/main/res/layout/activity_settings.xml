@@ -26,7 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="Close"
+                    android:text="@string/closebtn"
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"
-                    android:text="Update"
+                    android:text="@string/updateyourprofile"
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -79,19 +79,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_image_change_btn"
-        android:hint="Phone Number..."
-        android:layout_margin="15dp"
+        android:layout_marginStart="15dp"
 
-        android:padding="10dp"
-        />
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:hint="@string/enterphone"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/settings_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/settings_phone_number"
-        android:hint="Address..."
-        android:layout_margin="15dp"
-        android:padding="10dp"
-        />
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:hint="@string/enteraddress"
+        android:padding="10dp" />
 </RelativeLayout>
