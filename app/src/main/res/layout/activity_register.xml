@@ -9,26 +9,30 @@
 
     <ImageView
         android:id="@+id/register_applogo"
-        android:layout_width="300dp"
-        android:layout_height="130dp"
+        android:layout_width="322dp"
+        android:layout_height="159dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-83dp"
-        android:layout_marginTop="180dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="536dp"
         android:padding="5dp"
         android:src="@drawable/logo3" />
 
     <TextView
         android:id="@+id/app_slogan"
-        android:layout_width="243dp"
-        android:layout_height="168dp"
+        android:layout_width="227dp"
+        android:layout_height="74dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="191dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="372dp"
-        android:text="DREAM MART"
+        android:layout_marginTop="238dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="418dp"
+        android:text="@string/app_slogan"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/design_default_color_background"
@@ -39,17 +43,18 @@
         android:id="@+id/register_username_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/register_applogo"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="371dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
         android:hint="@string/enterthename"
         android:inputType="text"
         android:padding="20dp"
         android:textColor="@color/cardview_light_background"
+
         android:textColorHint="@color/cardview_light_background"
         android:textSize="19sp"
-
         android:textStyle="bold" />
 
     <EditText

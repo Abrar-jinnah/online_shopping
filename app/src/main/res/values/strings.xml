@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">OnlineShopping</string>
     //IT19352572
-
+    app_slogan
     <string name="main_join_now_btn">Join Now</string>
     <string name="main_login_btn"> Already have an Account? Login</string>
     <string name="login_phone_number_input">Phone Number</string>
     <string name="login_password_input">Password</string>
     <string name="remember_me_chkb">Remember me</string>
     <string name="login_btn">Login</string>
+    <string name="app_slogan">DREAM MART</string>
     <string name="admin_panel_link">I am an Admin?</string>
     <string name="close_settings_btn">Close</string>
     <string name="update_account_settings_btn">Update</string>
