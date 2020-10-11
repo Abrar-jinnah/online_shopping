@@ -72,6 +72,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd. yyy");
         saveCurrentDate = currentDate.format(calForDate.getTime());
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+
         saveCurrentTime = currentDate.format(calForDate.getTime());
         final DatabaseReference ordersRef= FirebaseDatabase.getInstance().getReference()
                 .child("Orders")
