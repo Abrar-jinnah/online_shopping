@@ -1,5 +1,6 @@
 package com.example.onlineshopping;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,14 +48,17 @@ public class CartActivity extends AppCompatActivity {
         NextProcessBtn = (Button)findViewById(R.id.next_btn);
         txtTotalAmount = (TextView)findViewById(R.id.total_price);
         txtMsg1 = (TextView)findViewById(R.id.msg1);
+
         NextProcessBtn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                txtTotalAmount.setText("Total Price = $"+String.valueOf(overTotalPrice));
+
                 Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
                 startActivity(intent);
                 finish();
+                txtTotalAmount.setText("Rs.Total Price = "+ overTotalPrice);
             }
         });
 
@@ -73,12 +77,13 @@ public class CartActivity extends AppCompatActivity {
                         .build();
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
+            @SuppressLint("SetTextI18n")
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model) {
                 holder.txtProductQuantity.setText("Quantity = "+model.getQuantity());
-                holder.txtProductPrice.setText("Price = "+model.getPrice()+" $");
+                holder.txtProductPrice.setText(" Rs." + "Price = "+model.getPrice());
                 holder.txtProductName.setText(model.getPname());
-                int oneTyprProductTPrice = ((Integer.valueOf(model.getPrice())))* Integer.valueOf(model.getQuantity());
+                int oneTyprProductTPrice = ((Integer.parseInt(model.getPrice())))* Integer.parseInt(model.getQuantity());
                 overTotalPrice = overTotalPrice + oneTyprProductTPrice;
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {

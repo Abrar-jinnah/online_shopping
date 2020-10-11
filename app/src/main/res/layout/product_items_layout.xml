@@ -39,7 +39,7 @@
             android:layout_below="@+id/product_image"
             android:text="@string/productprice"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_green_light"
+            android:textColor="@android:color/primary_text_light"
             android:textSize="18dp" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_marginTop="2dp"
             android:text="@string/productdescription"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_green_light"
+            android:textColor="?attr/actionMenuTextColor"
             android:textSize="16dp" />
 
     </RelativeLayout>
