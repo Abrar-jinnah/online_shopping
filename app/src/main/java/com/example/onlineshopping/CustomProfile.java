@@ -5,20 +5,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import Prevalent.Prevalent;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,16 +27,15 @@ import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
 
+import Prevalent.Prevalent;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CustomProfile extends AppCompatActivity {
+
     private CircleImageView profileImageView;
     private EditText userNameEditText, userPhoneEditText, passwordEditText;
-    private TextView profileChangeTextBtn, closeTextBtn, saveTextButton, deleteTestBtn;
-
     private Uri imageUri;
     private String myUrl = "";
-    private StorageTask uploadTask;
     private StorageReference storageProfilePictureRef;
     private String checker = "";
 
@@ -51,52 +45,29 @@ public class CustomProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_profile);
         storageProfilePictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
-
-        profileImageView = (CircleImageView) findViewById(R.id.profile_profile_image);
-        userNameEditText = (EditText) findViewById(R.id.profile_user_name);
-        userPhoneEditText = (EditText) findViewById(R.id.profile_phone_number);
-        passwordEditText = (EditText) findViewById(R.id.profile_password);
-        profileChangeTextBtn = (TextView) findViewById(R.id.profile_image_change_btn);
-        closeTextBtn = (TextView) findViewById(R.id.close_settings_btn);
-        deleteTestBtn = (Button) findViewById(R.id.delete_profile_btn);
-        saveTextButton = (TextView) findViewById(R.id.update_account_settings_btn);
-
+        profileImageView = findViewById(R.id.profile_profile_image);
+        userNameEditText = findViewById(R.id.profile_user_name);
+        userPhoneEditText = findViewById(R.id.profile_phone_number);
+        passwordEditText = findViewById(R.id.profile_password);
+        TextView profileChangeTextBtn = findViewById(R.id.profile_image_change_btn);
+        TextView closeTextBtn = findViewById(R.id.close_settings_btn);
+        TextView deleteTestBtn = (Button) findViewById(R.id.delete_profile_btn);
+        TextView saveTextButton = findViewById(R.id.update_account_settings_btn);
         userInfoDisplay(profileImageView, userNameEditText, userPhoneEditText, passwordEditText);
-
-        closeTextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
+        closeTextBtn.setOnClickListener(view -> finish());
+        deleteTestBtn.setOnClickListener(view -> deleteUser());
+        saveTextButton.setOnClickListener(view -> {
+            if (checker.equals("clicked")) {
+                userInfoSaved();
+            } else {
+                updateOnlyUserInfo();
             }
         });
-
-        deleteTestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteUser();
-            }
-        });
-
-        saveTextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (checker.equals("clicked")) {
-                    userInfoSaved();
-                } else {
-                    updateOnlyUserInfo();
-                }
-            }
-        });
-
-        profileChangeTextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checker = "clicked";
-
-                CropImage.activity(imageUri)
-                        .setAspectRatio(1, 1)
-                        .start(CustomProfile.this);
-            }
+        profileChangeTextBtn.setOnClickListener(view -> {
+            checker = "clicked";
+            CropImage.activity(imageUri)
+                    .setAspectRatio(1, 1)
+                    .start(CustomProfile.this);
         });
     }
 
@@ -111,13 +82,12 @@ public class CustomProfile extends AppCompatActivity {
 
     private void updateOnlyUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
-
         HashMap<String, Object> userMap = new HashMap<>();
         userMap.put("name", userNameEditText.getText().toString());
         userMap.put("password", passwordEditText.getText().toString());
         userMap.put("phone", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
-        startActivity(new Intent(CustomProfile.this, LoginActivity.class));
+        startActivity(new Intent(CustomProfile.this, HomeActivity.class));
         Toast.makeText(CustomProfile.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -125,15 +95,12 @@ public class CustomProfile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUri = result.getUri();
-
             profileImageView.setImageURI(imageUri);
         } else {
             Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
-
             startActivity(new Intent(CustomProfile.this, CustomProfile.class));
             finish();
         }
@@ -161,38 +128,30 @@ public class CustomProfile extends AppCompatActivity {
         if (imageUri != null) {
             final StorageReference fileRef = storageProfilePictureRef
                     .child(Prevalent.currentOnlineUser.getPhone() + ".jpg");
-
-            uploadTask = fileRef.putFile(imageUri);
-            uploadTask.continueWithTask(new Continuation() {
-                @Override
-                public Object then(@NonNull Task task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-
-                    return fileRef.getDownloadUrl();
+            fileRef.putFile(imageUri).continueWithTask((Continuation) task -> {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
                 }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri downloadUrl = task.getResult();
-                        myUrl = downloadUrl.toString();
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
-                        HashMap<String, Object> userMap = new HashMap<>();
-                        userMap.put("name", userNameEditText.getText().toString());
-                        userMap.put("password", passwordEditText.getText().toString());
-                        userMap.put("phone", userPhoneEditText.getText().toString());
-                        userMap.put("image", myUrl);
-                        ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
-                        progressDialog.dismiss();
-                        startActivity(new Intent(CustomProfile.this, HomeActivity.class));
-                        Toast.makeText(CustomProfile.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        progressDialog.dismiss();
-                        Toast.makeText(CustomProfile.this, "Error.", Toast.LENGTH_SHORT).show();
-                    }
+
+                return fileRef.getDownloadUrl();
+            }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                if (task.isSuccessful()) {
+                    Uri downloadUrl = task.getResult();
+                    myUrl = downloadUrl.toString();
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
+                    HashMap<String, Object> userMap = new HashMap<>();
+                    userMap.put("name", userNameEditText.getText().toString());
+                    userMap.put("password", passwordEditText.getText().toString());
+                    userMap.put("phone", userPhoneEditText.getText().toString());
+                    userMap.put("image", myUrl);
+                    ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
+                    progressDialog.dismiss();
+                    startActivity(new Intent(CustomProfile.this, HomeActivity.class));
+                    Toast.makeText(CustomProfile.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(CustomProfile.this, "Error.", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -204,7 +163,6 @@ public class CustomProfile extends AppCompatActivity {
     private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEditText, final EditText userPhoneEditText, final EditText addressEditText) {
         DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getPhone());
         UsersRef.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
