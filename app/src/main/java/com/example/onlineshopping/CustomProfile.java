@@ -103,8 +103,8 @@ public class CustomProfile extends AppCompatActivity {
     private void deleteUser() {
         FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getPhone()).removeValue();
         Toast.makeText(CustomProfile.this, "Successfully deleted the profile", Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(CustomProfile.this,MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK );
+        Intent intent = new Intent(CustomProfile.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
@@ -220,6 +220,9 @@ public class CustomProfile extends AppCompatActivity {
                     }
                     fullNameEditText.setText(name);
                     userPhoneEditText.setText(phone);
+                    if (!Prevalent.currentOnlineUser.getName().equals(name)) {
+                        Prevalent.currentOnlineUser.setName(name);
+                    }
                 }
 
             }
