@@ -117,7 +117,7 @@ public class CustomProfile extends AppCompatActivity {
         userMap.put("password", passwordEditText.getText().toString());
         userMap.put("phone", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
-        startActivity(new Intent(CustomProfile.this, HomeActivity.class));
+        startActivity(new Intent(CustomProfile.this, LoginActivity.class));
         Toast.makeText(CustomProfile.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }

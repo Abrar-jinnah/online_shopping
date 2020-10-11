@@ -6,20 +6,42 @@
     android:layout_height="match_parent"
     android:background="@drawable/backll"
     tools:context=".LoginActivity">
+
+
     <ImageView
-        android:id="@+id/login_applogo"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:src="@drawable/applogo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="195dp"
-        />
+        android:id="@+id/app_logo"
+        android:layout_width="145dp"
+        android:layout_height="113dp"
+        android:layout_above="@+id/main_join_now_btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="306dp"
+        android:layout_toStartOf="@+id/app_slogan"
+        android:src="@drawable/logo3" />
+
+    <TextView
+        android:id="@+id/app_slogan"
+        android:layout_width="232dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="186dp"
+        android:layout_marginEnd="17dp"
+        android:text="@string/dreammart"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="32sp"
+        android:textStyle="bold|italic" />
 
     <EditText
         android:id="@+id/login_phone_number_input"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_applogo"
+        android:layout_below="@+id/app_slogan"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"

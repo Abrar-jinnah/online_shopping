@@ -85,6 +85,12 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
+                            if (phone.length()!=10) {
+                                Toast.makeText(RegisterActivity.this, "Please try again with a valid number...", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else{
                             if (task.isSuccessful())
                             {
                                 Toast.makeText(RegisterActivity.this, "Congratulations, your account has been created.", Toast.LENGTH_SHORT).show();
@@ -98,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Network Error: Please try again after some time...", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    });
+                        } });
 
 
 
@@ -116,6 +122,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+            });
     }
 }

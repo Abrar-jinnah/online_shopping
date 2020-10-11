@@ -15,7 +15,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
-        android:text="Please write your Delivery Details"
+        android:text="@string/headeing"
 
         android:textAlignment="center"
         android:textColor="@android:color/primary_text_light"
@@ -31,7 +31,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="60dp"
         android:layout_marginRight="20dp"
-        android:hint="@string/enteryourname"
+        android:hint="@string/enterthename"
 
         android:textColorHint="@color/colorText" />
 

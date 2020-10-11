@@ -43,7 +43,6 @@
     <string name="productheading">Products</string>
     <string name="totalprice">Total Price</string>
     <string name="nextbtn">Next</string>
-    <string name="enteryourname">Name</string>
     <string name="enteryourphonenumber">Phone Number</string>
     <string name="enterhomeaddress">Address</string>
     <string name="enteryourcity">District</string>
@@ -63,6 +62,12 @@
     <string name="productprice">Product Price</string>
     <string name="productdescription">Product Description</string>
     <string name="showneworders">Show User Order Product</string>
+    <string name="dreammart">Dream Mart</string>
+    <string name="PostaName">Postal Name</string>
+    <string name="phonenumber">Phone Number...</string>
+    <string name="address">Address...</string>
+    <string name="headeing">Please write your Delivery Details</string>
+    <string name="hdng">Please Enter Your Residential Details</string>
 
 
 </resources>
