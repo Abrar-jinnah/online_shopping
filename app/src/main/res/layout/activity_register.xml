@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backll"
+    android:background="@drawable/abc"
     tools:context=".RegisterActivity">
 
     <ImageView
@@ -15,10 +15,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="536dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="530dp"
         android:padding="5dp"
         android:src="@drawable/logo3" />
 
