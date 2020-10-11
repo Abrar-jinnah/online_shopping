@@ -96,7 +96,7 @@ public class HomeActivity extends AppCompatActivity
                     {
                         holder.txtProductName.setText(model.getPname());
                         holder.txtProductDescription.setText(model.getDescription());
-                        holder.txtProductPrice.setText("Price = " + model.getPrice() + "$");
+                        holder.txtProductPrice.setText("Price = " + "Rs." + model.getPrice() );
                         Picasso.get().load(model.getImage()).into(holder.imageView);
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -165,8 +165,6 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
             Intent intent = new Intent(HomeActivity.this,SearchProductsActivity.class);
             startActivity(intent);
-
-        } else if (id == R.id.nav_categories) {
 
         } else if (id == R.id.nav_profile) {
             Intent intent=new Intent(HomeActivity.this, CustomProfile.class);
