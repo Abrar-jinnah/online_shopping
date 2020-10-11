@@ -30,36 +30,30 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import Prevalent.Prevalent;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class SettingsActivity extends AppCompatActivity {
-    private CircleImageView profileImageView;
-    private EditText fullNameEditText, userPhoneEditText, addressEditText;
-    private TextView profileChangeTextBtn,  closeTextBtn, saveTextButton;
+    private EditText  userPhoneEditText, addressEditText,nameEditText;
+    private TextView   closeTextBtn, saveTextButton;
 
-    private Uri imageUri;
-    private String myUrl = "";
-    private StorageTask uploadTask;
-    private StorageReference storageProfilePrictureRef;
     private String checker = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
 
-        profileImageView = (CircleImageView) findViewById(R.id.settings_profile_image);
         userPhoneEditText = (EditText) findViewById(R.id.settings_phone_number);
+        nameEditText = (EditText) findViewById(R.id.postal_name);
         addressEditText = (EditText) findViewById(R.id.settings_address);
-        profileChangeTextBtn = (TextView) findViewById(R.id.profile_image_change_btn);
         closeTextBtn = (TextView) findViewById(R.id.close_settings_btn);
         saveTextButton = (TextView) findViewById(R.id.update_account_settings_btn);
 
-        userInfoDisplay(profileImageView, fullNameEditText, userPhoneEditText, addressEditText);
+        userInfoDisplay(nameEditText,userPhoneEditText, addressEditText);
 
         closeTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,124 +78,41 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        profileChangeTextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                checker = "clicked";
 
-                CropImage.activity(imageUri)
-                        .setAspectRatio(1, 1)
-                        .start(SettingsActivity.this);
-            }
-        });
     }
 
     private void updateOnlyUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
         HashMap<String, Object> userMap = new HashMap<>();
+        userMap. put("postalname", nameEditText.getText().toString());
         userMap. put("address", addressEditText.getText().toString());
         userMap. put("phoneOrder", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
         startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
-        Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SettingsActivity.this, "Resident Details updated successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
-        {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageUri = result.getUri();
-
-            profileImageView.setImageURI(imageUri);
-        }
-        else
-        {
-            Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
-
-            startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
-            finish();
-        }
-    }
-
-
 
 
     private void userInfoSaved()
     {
-         if (TextUtils.isEmpty(addressEditText.getText().toString()))
+         if (TextUtils.isEmpty(nameEditText.getText().toString()))
         {
-            Toast.makeText(this, "Enter the address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter the postal name", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(userPhoneEditText.getText().toString()))
         {
             Toast.makeText(this, "Enter the phone number.", Toast.LENGTH_SHORT).show();
         }
-        else if(checker.equals("clicked"))
-        {
-            uploadImage();
-        }
+         else if (TextUtils.isEmpty(addressEditText.getText().toString()))
+         {
+             Toast.makeText(this, "Enter the address", Toast.LENGTH_SHORT).show();
+         }
     }
 
-    private void uploadImage() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Update Profile");
-        progressDialog.setMessage("Please wait, while we are updating your account information");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
-        if (imageUri != null)
-        {
-            final StorageReference fileRef = storageProfilePrictureRef
-                    .child(Prevalent.currentOnlineUser.getPhone() + ".jpg");
 
-            uploadTask = fileRef.putFile(imageUri);
-            uploadTask.continueWithTask(new Continuation() {
-                @Override
-                public Object then(@NonNull Task task) throws Exception {
-                    if (!task.isSuccessful())
-                    {
-                        throw task.getException();
-                    }
-
-                    return fileRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri downloadUrl = task.getResult();
-                        myUrl = downloadUrl.toString();
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
-                        HashMap<String, Object> userMap = new HashMap<>();
-                        userMap. put("address", addressEditText.getText().toString());
-                        userMap. put("phoneOrder", userPhoneEditText.getText().toString());
-                        userMap. put("image", myUrl);
-                        ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
-                        progressDialog.dismiss();
-                        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
-                        Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                    else{
-                        progressDialog.dismiss();
-                        Toast.makeText(SettingsActivity.this, "Error.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-        else
-        {
-            Toast.makeText(this, "image is not selected.", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-    private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEditText, final EditText userPhoneEditText, final EditText addressEditText)
+    private void userInfoDisplay(final EditText nameEditText,final EditText userPhoneEditText, final EditText addressEditText)
     {
         DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getPhone());
         UsersRef.addValueEventListener(new ValueEventListener() {
@@ -209,13 +120,14 @@ public class SettingsActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())
                 {
-                    if (dataSnapshot.child("image").exists())
+                    if (dataSnapshot.child("phoneOrder").exists())
                     {
-                        String image = dataSnapshot.child("image").getValue().toString();
-                        String phone = dataSnapshot.child("phoneOrder").getValue().toString();
-                        String address = dataSnapshot.child("address").getValue().toString();
-                        Picasso.get().load(image).into(profileImageView);
 
+                        String name = Objects.requireNonNull(dataSnapshot.child("postalname").getValue()).toString();
+                        String phone = Objects.requireNonNull(dataSnapshot.child("phoneOrder").getValue()).toString();
+                        String address = Objects.requireNonNull(dataSnapshot.child("address").getValue()).toString();
+
+                        nameEditText.setText(name);
                         userPhoneEditText.setText(phone);
                         addressEditText.setText(address);
                     }
