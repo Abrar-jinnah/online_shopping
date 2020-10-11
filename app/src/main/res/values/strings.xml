@@ -43,10 +43,10 @@
     <string name="productheading">Products</string>
     <string name="totalprice">Total Price</string>
     <string name="nextbtn">Next</string>
-    <string name="enteryourname">Your Name</string>
-    <string name="enteryourphonenumber">Your Phone Number</string>
-    <string name="enterhomeaddress">Your Home Address</string>
-    <string name="enteryourcity">Your City Name</string>
+    <string name="enteryourname">Name</string>
+    <string name="enteryourphonenumber">Phone Number</string>
+    <string name="enterhomeaddress">Address</string>
+    <string name="enteryourcity">District</string>
     <string name="confirmtheshippment">Confirm</string>
     <string name="enterthename">Name</string>
     <string name="enterthephonenumber">Phone Number</string>

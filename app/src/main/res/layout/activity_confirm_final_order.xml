@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/abcde"
     tools:context=".ConfirmFinalOrderActivity">
 
     <TextView
@@ -14,10 +15,11 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
-        android:text="Please write your Shipment Details"
+        android:text="Please write your Delivery Details"
 
         android:textAlignment="center"
-        android:textColor="@android:color/holo_green_light"
+        android:textColor="@android:color/primary_text_light"
+        android:textColorHint="#F81E1D1D"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -31,7 +33,7 @@
         android:layout_marginRight="20dp"
         android:hint="@string/enteryourname"
 
-        />
+        android:textColorHint="@color/colorText" />
 
     <EditText
         android:id="@+id/shippment_phone_number"
@@ -42,8 +44,9 @@
         android:layout_marginTop="60dp"
         android:layout_marginRight="20dp"
         android:hint="@string/enteryourphonenumber"
+        android:inputType="number"
         android:maxLength="10"
-        android:inputType="number" />
+        android:textColorHint="@color/design_default_color_background" />
 
     <EditText
         android:id="@+id/shippment_address"
@@ -53,7 +56,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="60dp"
         android:layout_marginRight="20dp"
-        android:hint="@string/enterhomeaddress" />
+        android:hint="@string/enterhomeaddress"
+        android:textColorHint="@color/design_default_color_surface" />
 
     <EditText
         android:id="@+id/shippment_city"
@@ -63,7 +67,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="60dp"
         android:layout_marginRight="20dp"
-        android:hint="@string/enteryourcity" />
+        android:hint="@string/enteryourcity"
+        android:textColorHint="@color/colorText" />
 
     <Button
         android:id="@+id/confirm_final_order_btn"
