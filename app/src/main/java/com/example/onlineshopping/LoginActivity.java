@@ -16,91 +16,70 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import Model.Users;
 import Prevalent.Prevalent;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.CheckBox;
+
 import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText InputPhoneNumber, InputPassword;
+    private EditText InputPhoneNumber;
+    private EditText InputPassword;
     private Button LoginButton;
     private ProgressDialog loadingBar;
     private TextView AdminLink, NotAdminLink;
     private String parentDbName = "Users";
     private CheckBox chkBoxRememberMe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        LoginButton = (Button) findViewById(R.id.login_btn);
-        InputPassword = (EditText) findViewById(R.id.login_password_input);
-        InputPhoneNumber = (EditText) findViewById(R.id.login_phone_number_input);
-        AdminLink = (TextView) findViewById(R.id.admin_panel_link);
-        NotAdminLink = (TextView) findViewById(R.id.not_admin_panel_link);
+        LoginButton = findViewById(R.id.login_btn);
+        InputPassword = findViewById(R.id.login_password_input);
+        InputPhoneNumber = findViewById(R.id.login_phone_number_input);
+        AdminLink = findViewById(R.id.admin_panel_link);
+        NotAdminLink = findViewById(R.id.not_admin_panel_link);
         loadingBar = new ProgressDialog(this);
-        chkBoxRememberMe = (CheckBox) findViewById(R.id.remember_me_chkb);
+        chkBoxRememberMe = findViewById(R.id.remember_me_chkb);
         Paper.init(this);
-        LoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginUser();
-            }
+        LoginButton.setOnClickListener(view -> LoginUser());
+        AdminLink.setOnClickListener(view -> {
+            LoginButton.setText("Login Admin");
+            AdminLink.setVisibility(View.INVISIBLE);
+            NotAdminLink.setVisibility(View.VISIBLE);
+            parentDbName = "Admins";
         });
-
-        AdminLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                LoginButton.setText("Login Admin");
-                AdminLink.setVisibility(View.INVISIBLE);
-                NotAdminLink.setVisibility(View.VISIBLE);
-                parentDbName = "Admins";
-            }
+        NotAdminLink.setOnClickListener(view -> {
+            LoginButton.setText("Login");
+            AdminLink.setVisibility(View.VISIBLE);
+            NotAdminLink.setVisibility(View.INVISIBLE);
+            parentDbName = "Users";
         });
-        NotAdminLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                LoginButton.setText("Login");
-                AdminLink.setVisibility(View.VISIBLE);
-                NotAdminLink.setVisibility(View.INVISIBLE);
-                parentDbName = "Users";
-            }
-        });
-
     }
-    private void LoginUser()
-    {
+
+    private void LoginUser() {
         String phone = InputPhoneNumber.getText().toString();
         String password = InputPassword.getText().toString();
-
-        if (TextUtils.isEmpty(phone))
-        {
+        if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(password))
-        {
+        } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        } else {
             loadingBar.setTitle("Login Account");
             loadingBar.setMessage("Please wait, while we are checking the credentials.");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
-
-
             AllowAccessToAccount(phone, password);
         }
     }
-    private void AllowAccessToAccount(final String phone, final String password)
-    {
 
-        if(chkBoxRememberMe.isChecked())
-        {
+    private void AllowAccessToAccount(final String phone, final String password) {
+        if (chkBoxRememberMe.isChecked()) {
             Paper.book().write(Prevalent.UserPhoneKey, phone);
             Paper.book().write(Prevalent.UserPasswordKey, password);
         }
@@ -109,22 +88,17 @@ public class LoginActivity extends AppCompatActivity {
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(parentDbName).child(phone).exists()){
-
+                if (dataSnapshot.child(parentDbName).child(phone).exists()) {
                     Users usersData = dataSnapshot.child(parentDbName).child(phone).getValue(Users.class);
-                    if (usersData.getPhone().equals(phone))
-                    {
-                        if (usersData.getPassword().equals(password))
-                        {
-                            if(parentDbName.equals("Admins"))
-                            {
+                    if (usersData.getPhone().equals(phone)) {
+                        if (usersData.getPassword().equals(password)) {
+                            if (parentDbName.equals("Admins")) {
                                 Toast.makeText(LoginActivity.this, "Welcome Admin, you are logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
                                 Intent intent = new Intent(LoginActivity.this, AdminCategoryActivity.class);
                                 startActivity(intent);
-                            }
-                            else if (parentDbName.equals("Users")){
+                            } else if (parentDbName.equals("Users")) {
                                 Toast.makeText(LoginActivity.this, "logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
@@ -132,23 +106,19 @@ public class LoginActivity extends AppCompatActivity {
                                 Prevalent.currentOnlineUser = usersData;
                                 startActivity(intent);
                             }
-
-                        }
-                        else {
+                        } else {
                             loadingBar.dismiss();
-                            Toast.makeText(LoginActivity.this,"Password is incorrect",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
                         }
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(LoginActivity.this, "Account with this " + phone + " number do not exists.", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                // empty method body
             }
         });
     }
